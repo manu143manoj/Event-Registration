@@ -1,0 +1,108 @@
+{% extends 'EventRegistrationHEApp/base.html' %}
+{% block body_block %}
+    {% load static %}
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'admindb/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{% static 'admindb/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'admindb/dist/css/adminlte.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <br><br><br>
+
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-6" style="margin: 0 140px; max-width: 100%; flex: 0 0 80%;">
+            <!-- USERS LIST -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Registered Users</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <ul class="users-list clearfix">
+                        {% for a in users %}
+                            <li>
+                                {% if a.id_cards %}
+                                    <img src="{{ a.id_cards.url }}" alt="User Image" style="max-width: 40%;">
+                                {% else %}
+                                    <img src="{% static 'images/user-default.png' %}" alt="Default User Image"
+                                         style="max-width: 30%;">
+                                {% endif %}
+                                <a class="users-list-name" href="#">{{ a.full_name }}</a>
+                                <a class="users-list-name"
+                                   href="{% url 'userd' value=a.registration_id %}">{{ a.registration_id }}</a>
+                                <span class="users-list-date">{{ a.registration_date }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <!-- /.users-list -->
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer text-center">
+
+                    {% if users.has_other_pages %}
+                        <nav aria-label="Page navigation example" style="display: inline-block;">
+                            <ul class="pagination">
+                                {% if users.has_previous %}
+                                    <li class="page-item"><a class="page-link"
+                                                             href="?page={{ users.previous_page_number }}">&laquo;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+                                {% endif %}
+                                {% for i in users.paginator.page_range %}
+                                    {% if users.number == i %}
+                                        <li class="active page-item"><span class="page-link">{{ i }} <span
+                                                class="sr-only">(current)</span></span></li>
+                                    {% else %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if users.has_next %}
+                                    <li class="page-item"><a class="page-link"
+                                                             href="?page={{ users.next_page_number }}">&raquo;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="disabled page-item"><span class="page-link">&raquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    {% endif %}
+                </div>
+                <!-- /.card-footer Pagination -->
+            </div>
+            <!--/.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+    {#    Admin Scripts#}
+    <!-- jQuery -->
+    <script src="{% static 'admindb/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'admindb/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'admindb/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'admindb/dist/js/adminlte.js' %}"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="{% static 'admindb/dist/js/demo.js' %}"></script>
+
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    <script src="{% static 'admindb/plugins/jquery-mousewheel/jquery.mousewheel.js' %}"></script>
+    <script src="{% static 'admindb/plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'admindb/plugins/jquery-mapael/jquery.mapael.min.js' %}"></script>
+    <script src="{% static 'admindb/plugins/jquery-mapael/maps/usa_states.min.js' %}"></script>
+    <!-- ChartJS -->
+    <script src="{% static 'admindb/plugins/chart.js/Chart.min.js' %}"></script>
+
+    <!-- PAGE SCRIPTS -->
+    <script src="{% static 'admindb/dist/js/pages/dashboard2.js' %}"></script>
+    {#Admin Scripts End    #}
+{% endblock %}

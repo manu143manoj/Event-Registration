@@ -1,0 +1,90 @@
+{% extends 'EventRegistrationHEApp/base.html' %}
+{% block body_block %}
+    {% load static %}
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'admindb/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{% static 'admindb/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'admindb/dist/css/adminlte.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <br><br><br>
+
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-6" style="margin: 0 140px; max-width: 100%; flex: 0 0 80%;">
+            <!-- USERS LIST -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Users Details</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool"><a href="{% url 'registeredusers' %}"><i
+                                class="fas fa-times"></i></a>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <th scope="col">Registration ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Mobile No</th>
+                            <th scope="col">Email Id</th>
+                            <th scope="col">Registration Type</th>
+                            <th scope="col">No of Tickets</th>
+                            <th scope="col">Registration Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">{{ u.registration_id }}</th>
+                            <td>{{ u.full_name }}</td>
+                            <td>{{ u.mobile }}</td>
+                            <td>{{ u.email }}</td>
+                            <td>{{ u.registration_type }}</td>
+                            <td>{{ u.no_of_tickets }}</td>
+                            <td>{{ u.registration_date }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- /.users-list -->
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!--/.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+    {#    Admin Scripts#}
+    <!-- jQuery -->
+    <script src="{% static 'admindb/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'admindb/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'admindb/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'admindb/dist/js/adminlte.js' %}"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="{% static 'admindb/dist/js/demo.js' %}"></script>
+
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    <script src="{% static 'admindb/plugins/jquery-mousewheel/jquery.mousewheel.js' %}"></script>
+    <script src="{% static 'admindb/plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'admindb/plugins/jquery-mapael/jquery.mapael.min.js' %}"></script>
+    <script src="{% static 'admindb/plugins/jquery-mapael/maps/usa_states.min.js' %}"></script>
+    <!-- ChartJS -->
+    <script src="{% static 'admindb/plugins/chart.js/Chart.min.js' %}"></script>
+
+    <!-- PAGE SCRIPTS -->
+    <script src="{% static 'admindb/dist/js/pages/dashboard2.js' %}"></script>
+    {#Admin Scripts End    #}
+{% endblock %}

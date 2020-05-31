@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Registration Form</title>
+
+    <!-- Icons font CSS-->
+    {% load static %}
+    <link href="{% static 'js/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+{#    <link href="{% static 'js/font-awesome-4.7/font-awesome.min.css' %}" rel="stylesheet" media="all">#}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/fontawesome.min.css" rel="stylesheet" media="all">
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'js/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'js/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'css/registerform.css' %}" rel="stylesheet" media="all">
+</head>
+
+<body>
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins col-sm-6">
+    <div class="wrapper wrapper--w780" style="margin: 0 10px;">
+        <div class="card card-3">
+            <div class="card-heading"
+                 style="background: url({% static 'images/bg-heading-03.jpg' %}) top left/cover no-repeat;"></div>
+            <div class="card-body">
+                <h2 class="title">Registration Info</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="input-group">
+                        {{ register_form.full_name }}
+                    </div>
+                    <div class="input-group">
+                        {{ register_form.mobile }}
+                    </div>
+                    <div class="input-group">
+                        {{ register_form.email }}
+                    </div>
+                    <div class="input-group">
+                        {{ register_form.id_cards }}
+                    </div>
+                    <div class="input-group">
+                        {{ register_form.registration_type }}
+                    </div>
+                    <div class="input-group">
+                        {{ register_form.no_of_tickets }}
+                    </div>
+                    <div class="p-t-10">
+                        <button type="submit" class="btn btn--pill btn--green" >Submit</button>
+                        <a class="btn btn--pill btn--" style="text-decoration:none; position: absolute;"
+                           href="{% url 'home' %}">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-wrapper bg-gra-01 p-t-180 p-b-100 font-poppins col-sm-6" style="height: 920px;">
+    <div class="wrapper wrapper--w780" style="margin: 0 10px;">
+        <div class="card card-3">
+            <div class="card-body">
+                <h2 class="title">Registration Form Preview</h2>
+                    <div class="input-group">
+                        <input type="text" name="full_name" maxlength="250"  id="id_full_name1" class="input--style-3" placeholder="Full Name" disabled>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="mobile" maxlength="250"  id="id_mobile1" class="input--style-3" placeholder="Mobile Number" disabled>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="email" maxlength="250"  id="id_email1" class="input--style-3" placeholder="Email ID" disabled>
+                    </div>
+                    <div class="input-group">
+                        <img id="id_image1" class="img-responsive" style="height: 66px;" alt="ID Card"/>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="email" maxlength="250"  id="id_rtype1" class="input--style-3" placeholder="Registration Type" disabled>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="email" maxlength="250"  id="id_ntick1" class="input--style-3" placeholder="No of Tickets" disabled>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS Files-->
+<script src="{% static 'js/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/select2/select2.min.js' %}"></script>
+<script src="{% static 'js/datepicker/moment.min.js' %}"></script>
+<script src="{% static 'js/datepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'js/global.js' %}"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#id_full_name').attr('class', 'input--style-3');
+        $('#id_full_name').attr('placeholder', 'Full Name');
+        $('#id_mobile').attr('class', 'input--style-3');
+        $('#id_mobile').attr('placeholder', 'Mobile Number');
+        $('#id_email').attr('class', 'input--style-3');
+        $('#id_email').attr('placeholder', 'Email ID');
+        $('#id_id_cards').attr('class', 'input--style-3');
+        $('#id_id_cards').attr('onchange', 'document.getElementById("id_image1").src = window.URL.createObjectURL(this.files[0])');
+        $('#id_id_cards').attr('accept', '.jpeg, .png');
+        $('#id_no_of_tickets').attr('class', 'input--style-3');
+        $('#id_no_of_tickets').attr('placeholder', 'No of Tickets');
+
+        x = $('#id_full_name1').val($('#id_no_of_tickets').val());
+        $('#id_registration_type').change(function () {
+            if ($('#id_registration_type').val() == 'Self') {
+                $('#id_no_of_tickets').val("1");
+            } else {
+                $('#id_no_of_tickets').val();
+            }
+        });
+
+        $('#id_full_name').change(function () {
+            $('#id_full_name1').val($('#id_full_name').val())
+        });
+        $('#id_mobile').change(function () {
+            $('#id_mobile1').val($('#id_mobile').val())
+        });
+        $('#id_email').change(function () {
+            $('#id_email1').val($('#id_email').val())
+        });
+        $('#id_registration_type').change(function () {
+            $('#id_rtype1').val($('#id_registration_type').val())
+            if ($('#id_rtype1').val() == 'Self')
+                $('#id_ntick1').val($('#id_no_of_tickets').val())
+            else
+                $('#id_ntick1').val()
+        });
+        $('#id_no_of_tickets').change(function () {
+            $('#id_ntick1').val($('#id_no_of_tickets').val())
+        });
+    });
+</script>
+
+</body>
+
+</html>
+<!-- end document-->

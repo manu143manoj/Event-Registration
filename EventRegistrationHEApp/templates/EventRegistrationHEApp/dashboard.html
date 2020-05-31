@@ -1,0 +1,108 @@
+{% extends 'EventRegistrationHEApp/base.html' %}
+{% block body_block %}
+    {% load static %}
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'admindb/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{% static 'admindb/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'admindb/dist/css/adminlte.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    <div id="header" class="d-flex align-items-center">
+        <div class="container d-flex flex-column align-items-center">
+
+            <div class="col-md-4" style="max-width: 100%">
+                <!-- Info Boxes Style 2 -->
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Registration Type</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="chart-responsive">
+                                    <div class="chartjs-size-monitor">
+                                        <div class="chartjs-size-monitor-expand">
+                                            <div class=""></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink">
+                                            <div class=""></div>
+                                        </div>
+                                    </div>
+                                    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                                </div>
+                                <!-- ./chart-responsive -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-4"
+                            ">
+                            <ul class="chart-legend clearfix">
+                                <li><i class="far fa-circle text-primary"></i> Self</li>
+                                <li><i class="far fa-circle text-danger"></i> Group</li>
+                                <li><i class="far fa-circle text-info"></i> Corporate</li>
+                                <li><i class="far fa-circle text-success"></i> Others</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {#    Admin Scripts#}
+    <!-- jQuery -->
+    <script src="{% static 'admindb/plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'admindb/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- overlayScrollbars -->
+    <script src="{% static 'admindb/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'admindb/dist/js/adminlte.js' %}"></script>
+
+    <!-- OPTIONAL SCRIPTS -->
+    <script src="{% static 'admindb/dist/js/demo.js' %}"></script>
+
+    <!-- PAGE PLUGINS -->
+    <!-- jQuery Mapael -->
+    <script src="{% static 'admindb/plugins/jquery-mousewheel/jquery.mousewheel.js' %}"></script>
+    <script src="{% static 'admindb/plugins/raphael/raphael.min.js' %}"></script>
+    <script src="{% static 'admindb/plugins/jquery-mapael/jquery.mapael.min.js' %}"></script>
+    <script src="{% static 'admindb/plugins/jquery-mapael/maps/usa_states.min.js' %}"></script>
+    <!-- ChartJS -->
+    <script src="{% static 'admindb/plugins/chart.js/Chart.min.js' %}"></script>
+
+    <!-- PAGE SCRIPTS -->
+    <script src="{% static 'admindb/dist/js/pages/dashboard2.js' %}"></script>
+    {#Admin Scripts End    #}
+
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: 'light',
+                animationEnabled: true,
+
+                data: [{
+                    type: "doughnut",
+                    startAngle: 240,
+                    yValueFormatString: "##0 \"Members\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                            {y: {{ a.0 }}, label: "Self"},
+                            {y: {{ a.1 }}, label: "Group"},
+                            {y: {{ a.2 }}, label: "Corporate"},
+                            {y: {{ a.3 }}, label: "Others"}
+                    ]
+                }]
+            });
+
+            chart.render();
+        }
+    </script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+{% endblock %}

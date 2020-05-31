@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>Home</title>
+</head>
+<body>
+<header id="header" class="d-flex align-items-center">
+    <div class="container d-flex flex-column align-items-center">
+
+        <h1>Hello World ! </h1>
+        <h2> New Event is here..... Register Here <a class="smooth-scroll btn btn-outline-light"
+                                                     href="{% url 'registerform' %}">Get Started</a></h2>
+
+        <div class="countdown d-flex justify-content-center" data-count="2020/12/30">
+            <div>
+                <h3>%D</h3>
+                <h4>Days</h4>
+            </div>
+            <div>
+                <h3>%H</h3>
+                <h4>Hours</h4>
+            </div>
+            <div>
+                <h3>%M</h3>
+                <h4>Minutes</h4>
+            </div>
+            <div>
+                <h3>%S</h3>
+                <h4>Seconds</h4>
+            </div>
+        </div>
+
+        <div class="subscribe">
+            <h4>Subscribe now to get the latest updates!</h4>
+            <form action="" method="post" role="form" class="php-email-form">
+                <div class="subscribe-form">
+                    <input type="email" name="email"><input type="submit" value="Subscribe">
+                </div>
+                <div class="mt-2">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your notification request was sent. Thank you!</div>
+                </div>
+            </form>
+        </div>
+
+        <div class="social-links text-center">
+            <a href="https://twitter.com" class="twitter"><i class="icofont-twitter"></i></a>
+            <a href="https://facebook.com" class="facebook"><i class="icofont-facebook"></i></a>
+            <a href="https://instagram.com" class="instagram"><i class="icofont-instagram"></i></a>
+            <a href="https://gmail.com" class="google-plus"><i class="icofont-skype"></i></a>
+            <a href="https://linkedin.com" class="linkedin"><i class="icofont-linkedin"></i></a>
+        </div>
+
+        <div style="padding-top: 50px;"><a class="smooth-scroll btn btn-outline-light" href="{% url 'login' %}">Event
+            Manager Login</a></div>
+
+    </div>
+</header>
+</body>
+</html>
